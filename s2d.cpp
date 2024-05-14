@@ -6,7 +6,7 @@
 #include <chrono>
 
 // Константы
-const double alpha = 401; // Коэффициент теплопроводности
+
 const double dt = 0.1;     // Шаг по времени
 const double dx = 0.1;     // Шаг по координате x
 const double dy = 0.1;     // Шаг по координате y
@@ -23,7 +23,7 @@ void printTemperature2D(const std::vector<std::vector<double>>& temperature) {
 
 
 // Функция для решения уравнения теплопроводности в 2D с учетом плотности и удельной теплоемкости
-void solveHeatEquation2D(double density, double specificHeat) {
+void solveHeatEquation2D(double density, double specificHeat, double alpha) {
     // Размеры сетки
     const int nx = 10; // Количество узлов по x
     const int ny = 10; // Количество узлов по y

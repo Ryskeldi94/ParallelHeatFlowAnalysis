@@ -1,6 +1,7 @@
-#ifndef FindMetal_H
-#define FindMetal_H
+#pragma once
 
-void FindMetal();
+#include "JSN/include/nlohmann/json.hpp"
 
-#endif // FindMetal_H
+using json = nlohmann::json;
+
+json FindMetal();

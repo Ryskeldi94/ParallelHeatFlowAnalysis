@@ -138,6 +138,9 @@
     <ClInclude Include="s1d.h" />
     <ClInclude Include="s2d.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="metals.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

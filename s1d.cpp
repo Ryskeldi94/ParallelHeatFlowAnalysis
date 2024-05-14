@@ -6,7 +6,6 @@
 #include <chrono>
 
 // Константы
-const double alpha = 401; // Коэффициент теплопроводности
 const double dt = 0.1;     // Шаг по времени
 const double dx = 0.1;     // Шаг по координате x
 const double dy = 0.1;     // Шаг по координате y
@@ -18,7 +17,7 @@ void printTemperature1D(const std::vector<double>& temperature) {
     std::cout << std::endl;
 }
 
-void solveHeatEquation1D(double density, double specificHeat) {
+void solveHeatEquation1D(double density, double specificHeat, double alpha) {
     // Размер сетки
     const int nx = 1000; // Количество узлов по x
 
