@@ -29,6 +29,7 @@ void solveHeatEquation1D(double density, double specificHeat, double alpha) {
     int highTempLocation = 5;  // Позиция высокой температуры по умолчанию
     float initialTemperature = 100.0;  // Начальная температура по умолчанию
 
+    SetConsoleColor(White);
     // Запрос у пользователя начальной температуры
     std::cout << "Введите начальную температуру (%):";
     std::cin >> initialTemperature;  // Ввод начальной температуры
@@ -61,6 +62,7 @@ void solveHeatEquation1D(double density, double specificHeat, double alpha) {
 
         temperature = newTemperature;  // Обновление значений температуры для следующего временного шага
 
+        SetConsoleColor(People);
         // Вывод значений температуры после каждого временного шага
         std::cout << "Step " << step + 1 << ": ";  // Вывод номера временного шага
         printTemperature1D(temperature);  // Вывод текущего распределения температуры

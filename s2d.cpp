@@ -32,7 +32,8 @@ void solveHeatEquation2D(double density, double specificHeat, double alpha) {
     int highTempLocationX = 5;  // Позиция высокой температуры по X
     int highTempLocationY = 5;  // Позиция высокой температуры по Y
     float initialTemperature = 100.0;  // Начальная температура
-
+    
+    SetConsoleColor(White);
     std::cout << "Введите начальную температуру (%):";  // Запрос ввода начальной температуры
     std::cin >> initialTemperature;  // Считывание начальной температуры с клавиатуры
 
@@ -77,6 +78,7 @@ void solveHeatEquation2D(double density, double specificHeat, double alpha) {
 #pragma omp critical  // Директива для безопасного доступа к общей переменной temperature
         temperature = newTemperature;  // Обновление значений температуры
 
+        SetConsoleColor(People);
         // Вывод значений температуры после каждого временного шага
         std::cout << "Step " << step + 1 << ":" << std::endl;  // Вывод номера временного
         printTemperature2D(temperature);
