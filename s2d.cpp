@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include "s2d.h"
+#include <omp.h> // Добавляем заголовочный файл OpenMP
+#include <chrono>
 
 // Константы
 const double alpha = 401; // Коэффициент теплопроводности
@@ -29,9 +31,10 @@ void solveHeatEquation2D(double density, double specificHeat) {
     // Начальное распределение температуры
     std::vector<std::vector<double>> temperature(nx, std::vector<double>(ny, 0.0));
     temperature[nx / 2][ny / 2] = 100.0; // Устанавливаем высокую температуру в центре
-
+    auto start = std::chrono::steady_clock::now();
     // Выполняем несколько временных шагов
-    const int numSteps = 100;
+    const int numSteps = 10000;
+#pragma omp parallel for // Директива OpenMP для параллельного выполнения внешнего цикла
     for (int step = 0; step < numSteps; ++step) {
         std::vector<std::vector<double>> newTemperature(nx, std::vector<double>(ny, 0.0));
 
@@ -47,11 +50,19 @@ void solveHeatEquation2D(double density, double specificHeat) {
         }
 
         // Обновляем значения температуры для следующего временного шага
+#pragma omp critical // Обеспечиваем безопасность доступа к общей переменной temperature
         temperature = newTemperature;
 
         // Выводим значения температуры после каждого временного шага (для наглядности)
-        std::cout << "Step " << step + 1 << ":" << std::endl;
+        /*std::cout << "Step " << step + 1 << ":" << std::endl;
         printTemperature2D(temperature);
-        std::cout << std::endl;
+        std::cout << std::endl;*/
     }
+    auto end = std::chrono::steady_clock::now();
+
+    // Вычисляем продолжительность выполнения кода
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    // Выводим продолжительность выполнения кода
+    std::cout << "Execution time: " << duration.count() << " milliseconds\n";
 }

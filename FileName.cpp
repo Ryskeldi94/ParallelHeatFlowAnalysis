@@ -17,10 +17,10 @@ int main() {
     std::cin >> dimensionality;
 
     // Выполняем соответствующее решение в зависимости от выбора пользователя
-    if (dimensionality == "1D" or "1d") {
+    if (dimensionality == "1D") {
         solveHeatEquation1D(density, specificHeat);
     }
-    else if (dimensionality == "2D" or "1d") {
+    else if (dimensionality == "2D") {
         solveHeatEquation2D(density, specificHeat);
     }
     else {
