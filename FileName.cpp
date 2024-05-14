@@ -2,6 +2,7 @@
 #include <vector>
 #include "s1d.h"
 #include "s2d.h"
+#include "FindMetal.h"
 
 int main() {
     // Запрашиваем данные о плотности и удельной теплоемкости
@@ -10,7 +11,7 @@ int main() {
     std::cin >> density;
     std::cout << "Enter specific heat: ";
     std::cin >> specificHeat;*/
-    
+    FindMetal();
     // Запрашиваем у пользователя выбор между 1D и 2D решением уравнения теплопроводности
     std::cout << "Choose dimensionality (1D or 2D): ";
     std::string dimensionality;
@@ -26,6 +27,6 @@ int main() {
     else {
         std::cout << "Invalid dimensionality! Please choose 1D or 2D." << std::endl;
     }
-
+    
     return 0;
 }
