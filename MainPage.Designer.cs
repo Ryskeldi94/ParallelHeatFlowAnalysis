@@ -1,6 +1,6 @@
 ﻿namespace Version2
 {
-    partial class Form1
+    partial class MainPage
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -81,6 +81,7 @@
             this.ChoiceIn.TabIndex = 3;
             this.ChoiceIn.Text = "Ввести свои свойства металла";
             this.ChoiceIn.UseVisualStyleBackColor = true;
+            this.ChoiceIn.Click += new System.EventHandler(this.ChoiceIn_Click);
             // 
             // Form1
             // 
