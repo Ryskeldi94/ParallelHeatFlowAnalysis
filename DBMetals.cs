@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
@@ -16,11 +17,13 @@ namespace Version2
         public static extern IntPtr solveHeatEquation1D(double density, double specificHeat, double alpha, int highTempLocation, float initialTemperature, float ambientTemperature, int numSteps, int nx);
 
         private List<Metal> metalsList; // объявляем переменную как член класса
+        int selectedMetod = 0;
 
         public DBMetals()
         {
             InitializeComponent();
 
+            
             comboBoxMetals.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
@@ -81,18 +84,23 @@ namespace Version2
                 int numSteps = 100; // Установите значение на свое усмотрение
                 int nx = 10; // Установите значение на свое усмотрение
 
-                IntPtr resultPtr = solveHeatEquation1D(density, specificHeat, alpha, highTempLocation, initialTemperature, ambientTemperature, numSteps, nx);
+                //IntPtr resultPtr = solveHeatEquation1D(density, specificHeat, alpha, highTempLocation, initialTemperature, ambientTemperature, numSteps, nx);
 
                 // Пример обработки результатов
-                if (resultPtr != IntPtr.Zero)
-                {
-                    // Ваш код для обработки результата
-                    // Например, преобразование указателя в массив или что-то еще
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка при вызове функции из DLL!");
-                }
+                
+                    if (selectedMetod == 0) {
+                        MessageBox.Show("Выберети метод тип решение");
+
+                    } else if (selectedMetod == 1) {
+                        Singl form = new Singl();
+                        form.Show();
+                        this.Hide();
+                    } else if (selectedMetod == 2) {
+                        TDimen dimen = new TDimen();
+                        dimen.Show();
+                        this.Hide();
+                    }                    
+                
             }
             else
             {
@@ -107,9 +115,12 @@ namespace Version2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Singl form3 = new Singl();
-            form3.Show();
-            this.Hide();
+            selectedMetod = 1;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            selectedMetod = 2;
         }
     }
 

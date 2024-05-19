@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnterPro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterPro.Designer.cs">
+      <DependentUpon>EnterPro.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TDimen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TDimen.Designer.cs">
+      <DependentUpon>TDimen.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="EnterPro.resx">
+      <DependentUpon>EnterPro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,6 +104,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TDimen.resx">
+      <DependentUpon>TDimen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="metals.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

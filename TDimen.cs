@@ -1,18 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Version2
 {
-    public partial class Singl : Form
+    public partial class TDimen : Form
     {
-        public Singl()
+       
+        public TDimen()
         {
             InitializeComponent();
             highTempLocation.KeyPress += textBox1_KeyPress; // Привязываем событие KeyPress к textBox1
             ambientTemperature.KeyPress += textBox2_KeyPress;
             initialTemperature.KeyPress += textBox3_KeyPress;
+            textBox5.KeyPress += textBox5_KeyPress;
 
         }
 
@@ -25,7 +32,6 @@ namespace Version2
                 e.Handled = true;
             }
         }
-
 
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -132,9 +138,15 @@ namespace Version2
             }
         }
 
-        private void ambientTemperature_TextChanged(object sender, EventArgs e)
-        {
+        
 
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Проверка на ввод только цифр и Backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

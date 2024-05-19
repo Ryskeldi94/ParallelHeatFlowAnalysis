@@ -1,6 +1,6 @@
 ﻿namespace Version2
 {
-    partial class Singl
+    partial class TDimen
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -43,6 +45,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.panel1.Controls.Add(this.textBox5);
+            this.panel1.Controls.Add(this.textBox4);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.textBox2);
@@ -54,8 +58,27 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(843, 696);
-            this.panel1.TabIndex = 2;
+            this.panel1.Size = new System.Drawing.Size(816, 707);
+            this.panel1.TabIndex = 3;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox5.Location = new System.Drawing.Point(691, 265);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(79, 40);
+            this.textBox5.TabIndex = 10;
+            this.textBox5.Text = "\r\n";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox4.Location = new System.Drawing.Point(47, 265);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(619, 35);
+            this.textBox4.TabIndex = 9;
+            this.textBox4.Text = "Введите местоположение с высокой температурой по y\r\n\r\n";
             // 
             // button1
             // 
@@ -65,22 +88,21 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox3
             // 
-            this.textBox3.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.Location = new System.Drawing.Point(47, 193);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(619, 40);
+            this.textBox3.Size = new System.Drawing.Size(619, 35);
             this.textBox3.TabIndex = 7;
-            this.textBox3.Text = "Введите местоположение с высокой температурой\r\n\r\n";
+            this.textBox3.Text = "Введите местоположение с высокой температурой по х\r\n\r\n";
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(47, 402);
+            this.textBox2.Location = new System.Drawing.Point(47, 434);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(619, 40);
@@ -90,7 +112,7 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(47, 299);
+            this.textBox1.Location = new System.Drawing.Point(47, 346);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(619, 40);
@@ -104,22 +126,21 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(664, 136);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Решение теплопроводност в одномерном плотности";
+            this.label2.Text = "Решение теплопроводност в двухмерном плотности";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ambientTemperature
             // 
             this.ambientTemperature.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ambientTemperature.Location = new System.Drawing.Point(691, 402);
+            this.ambientTemperature.Location = new System.Drawing.Point(691, 434);
             this.ambientTemperature.Name = "ambientTemperature";
             this.ambientTemperature.Size = new System.Drawing.Size(79, 40);
             this.ambientTemperature.TabIndex = 2;
-            this.ambientTemperature.TextChanged += new System.EventHandler(this.ambientTemperature_TextChanged);
             // 
             // initialTemperature
             // 
             this.initialTemperature.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.initialTemperature.Location = new System.Drawing.Point(691, 299);
+            this.initialTemperature.Location = new System.Drawing.Point(691, 346);
             this.initialTemperature.Name = "initialTemperature";
             this.initialTemperature.Size = new System.Drawing.Size(79, 40);
             this.initialTemperature.TabIndex = 1;
@@ -133,14 +154,14 @@
             this.highTempLocation.TabIndex = 0;
             this.highTempLocation.Text = "\r\n";
             // 
-            // Singl
+            // TDimen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 696);
+            this.ClientSize = new System.Drawing.Size(816, 707);
             this.Controls.Add(this.panel1);
-            this.Name = "Singl";
-            this.Text = "Form3";
+            this.Name = "TDimen";
+            this.Text = "TDimen";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -150,13 +171,15 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox highTempLocation;
-        private System.Windows.Forms.TextBox initialTemperature;
-        private System.Windows.Forms.TextBox ambientTemperature;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox ambientTemperature;
+        private System.Windows.Forms.TextBox initialTemperature;
+        private System.Windows.Forms.TextBox highTempLocation;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
