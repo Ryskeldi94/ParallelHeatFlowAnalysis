@@ -1,21 +1,33 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Net.Sockets;
 
 namespace Version2
 {
     public partial class Singl : Form
     {
-        public Singl()
+        private double _density;
+        private double _specificHeat;
+        private double _thermalConductivity;
+
+        // Конструктор с параметрами для передачи свойств металла
+        public Singl(double density, double specificHeat, double thermalConductivity)
         {
             InitializeComponent();
             highTempLocation.KeyPress += textBox1_KeyPress; // Привязываем событие KeyPress к textBox1
             ambientTemperature.KeyPress += textBox2_KeyPress;
             initialTemperature.KeyPress += textBox3_KeyPress;
 
+            _density = density;
+            _specificHeat = specificHeat;
+            _thermalConductivity = thermalConductivity;
         }
 
+        public Singl()
+        {
+
+        }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -25,8 +37,6 @@ namespace Version2
                 e.Handled = true;
             }
         }
-
-
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -39,51 +49,7 @@ namespace Version2
             }
 
             // Проверка на точку или запятую для ввода дробных чисел
-            if ((e.KeyChar == '.' || e.KeyChar == ',') && textBox.Text.Contains('.') && textBox.Text.Contains(','))
-            {
-                e.Handled = true;
-            }
-
-            // Замена запятой на точку для правильного ввода дробных чисел
-            if (e.KeyChar == ',')
-            {
-                e.KeyChar = '.';
-            }
-
-            // Если пользователь начинает вводить десятичную часть с запятой или точки, автоматически добавляем "0."
-            if ((textBox.SelectionStart == 0 || textBox.Text == "") && (e.KeyChar == '.' || e.KeyChar == ','))
-            {
-                textBox.Text = "0" + e.KeyChar;
-                textBox.SelectionStart = 2; // Переместить курсор в конец
-                e.Handled = true; // Предотвращаем добавление второй точки или запятой
-            }
-
-            // Проверка на количество цифр после десятичной точки
-            if (textBox.Text.Contains('.'))
-            {
-                int indexOfDot = textBox.Text.IndexOf('.');
-                if (textBox.Text.Length - indexOfDot > 2 && !char.IsControl(e.KeyChar))
-                {
-                    e.Handled = true;
-                }
-            }
-        }
-
-
-
-
-        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-
-            // Проверка на ввод только числовых символов, Backspace и точку
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
-            {
-                e.Handled = true;
-            }
-
-            // Проверка на точку или запятую для ввода дробных чисел
-            if ((e.KeyChar == '.' || e.KeyChar == ',') && textBox.Text.Contains('.') && textBox.Text.Contains(','))
+            if ((e.KeyChar == '.' || e.KeyChar == ',') && textBox.Text.Contains('.'))
             {
                 e.Handled = true;
             }
@@ -119,20 +85,107 @@ namespace Version2
             }
         }
 
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBox2_KeyPress(sender, e);
+        }
+
+        // Метод soket теперь возвращает массив результатов
+        static double[] soket(double density, double specificHeat, double alpha, double highTempLocation, double initialTemperature, double ambientTemperature, int numSteps, int nx)
+        {
+            string server = "127.0.0.1";
+            int port = 54000;
+
+            try
+            {
+                using (TcpClient client = new TcpClient(server, port))
+                {
+                    NetworkStream stream = client.GetStream();
+                    
+
+                    byte[] data = BitConverter.GetBytes(density);
+                    stream.Write(data, 0, data.Length);
+
+                    data = BitConverter.GetBytes(specificHeat);
+                    stream.Write(data, 0, data.Length);
+
+                    data = BitConverter.GetBytes(alpha);
+                    stream.Write(data, 0, data.Length);
+
+                    data = BitConverter.GetBytes(highTempLocation);
+                    stream.Write(data, 0, data.Length);
+
+                    data = BitConverter.GetBytes(initialTemperature);
+                    stream.Write(data, 0, data.Length);
+
+                    data = BitConverter.GetBytes(ambientTemperature);
+                    stream.Write(data, 0, data.Length);
+
+                    data = BitConverter.GetBytes(numSteps);
+                    stream.Write(data, 0, data.Length);
+
+                    data = BitConverter.GetBytes(nx);
+                    stream.Write(data, 0, data.Length);
+
+                    byte[] receivedData = new byte[nx * numSteps * sizeof(double)];
+                    stream.Read(receivedData, 0, data.Length);
+
+                    double[] result = new double[nx * numSteps];
+                    Buffer.BlockCopy(receivedData, 0, result, 0, data.Length);
+
+                    // Возвращаем результаты
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Выбрасываем исключение для обработки в вызывающем коде
+                throw ex;
+            }
+        }
+
+        // В методе button1_Click мы теперь получаем результаты от soket и отображаем их в dataGridViewResults
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(highTempLocation.Text) || string.IsNullOrEmpty(ambientTemperature.Text) || string.IsNullOrEmpty(initialTemperature.Text))
             {
-                MessageBox.Show("Пожалуйста, заполните все поля!");
+                MessageBox.Show("Please fill in all fields!");
             }
             else
             {
+                try
+                {
+                    double highTemp = double.Parse(highTempLocation.Text);
+                    double ambientTemp = double.Parse(ambientTemperature.Text);
+                    double initialTemp = double.Parse(initialTemperature.Text);
 
-                // Здесь можно выполнить действия, которые нужно совершить при заполненных полях
+                    int numSteps = 100;
+                    int nx = 10;
+
+                    // Получаем результаты от soket
+                    double[] results = soket(_density, _specificHeat, _thermalConductivity, highTemp, ambientTemp, initialTemp, numSteps, nx);
+
+                    // Очищаем dataGridViewResults перед добавлением новых результатов
+                    dataGridViewResults.Rows.Clear();
+
+                    // Добавляем результаты в dataGridViewResults
+                    for (int i = 0; i < numSteps; ++i)
+                    {
+                        dataGridViewResults.Rows.Add(results.Skip(i * nx).Take(nx).ToArray());
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invalid input format! Please enter numeric values.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Exception: " + ex.Message);
+                }
             }
         }
 
-        private void ambientTemperature_TextChanged(object sender, EventArgs e)
+        private void dataGridViewResults_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

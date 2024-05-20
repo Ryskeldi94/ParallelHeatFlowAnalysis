@@ -58,7 +58,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(868, 750);
+            this.panel1.Size = new System.Drawing.Size(824, 750);
             this.panel1.TabIndex = 3;
             // 
             // button1
@@ -104,7 +104,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Times New Roman", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(106, 18);
+            this.label2.Location = new System.Drawing.Point(106, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(664, 136);
             this.label2.TabIndex = 4;
@@ -166,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 750);
+            this.ClientSize = new System.Drawing.Size(824, 750);
             this.Controls.Add(this.panel1);
             this.Name = "EnterPro";
             this.Text = "EnterPro";

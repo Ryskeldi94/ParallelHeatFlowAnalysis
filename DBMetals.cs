@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Version2
 {
     public partial class DBMetals : Form
     {
-        [DllImport("HeatEquationSolver.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr solveHeatEquation1D(double density, double specificHeat, double alpha, int highTempLocation, float initialTemperature, float ambientTemperature, int numSteps, int nx);
-
         private List<Metal> metalsList; // объявляем переменную как член класса
         int selectedMetod = 0;
 
@@ -23,9 +16,7 @@ namespace Version2
         {
             InitializeComponent();
 
-            
             comboBoxMetals.DropDownStyle = ComboBoxStyle.DropDownList;
-
 
             // Загрузка данных из JSON файла
             string jsonFilePath = "C:\\Users\\rrysk\\OneDrive\\Рабочий стол\\Диплом\\Диплом граф интерфеис\\Version2\\metals.json";
@@ -35,7 +26,6 @@ namespace Version2
 
                 // Десериализация JSON данных в список металлов
                 metalsList = JsonConvert.DeserializeObject<MetalsList>(jsonData).Металлы; // присваиваем значение переменной
-                                                                                          // используем ключевое слово this, чтобы явно указать на член класса
                 foreach (var metal in this.metalsList)
                 {
                     comboBoxMetals.Items.Add(metal.Название);
@@ -78,29 +68,23 @@ namespace Version2
                 double density = selectedMetal.Плотность;
                 double specificHeat = selectedMetal.УдельнаяТеплоемкость;
                 double alpha = selectedMetal.КоэффициентТеплопроводности;
-                int highTempLocation = 5; // Установите значение на свое усмотрение
-                float initialTemperature = 78.0f; // Установите значение на свое усмотрение
-                float ambientTemperature = 34.0f; // Установите значение на свое усмотрение
-                int numSteps = 100; // Установите значение на свое усмотрение
-                int nx = 10; // Установите значение на свое усмотрение
 
-                //IntPtr resultPtr = solveHeatEquation1D(density, specificHeat, alpha, highTempLocation, initialTemperature, ambientTemperature, numSteps, nx);
-
-                // Пример обработки результатов
-                
-                    if (selectedMetod == 0) {
-                        MessageBox.Show("Выберети метод тип решение");
-
-                    } else if (selectedMetod == 1) {
-                        Singl form = new Singl();
-                        form.Show();
-                        this.Hide();
-                    } else if (selectedMetod == 2) {
-                        TDimen dimen = new TDimen();
-                        dimen.Show();
-                        this.Hide();
-                    }                    
-                
+                if (selectedMetod == 0)
+                {
+                    MessageBox.Show("Выберети метод тип решение");
+                }
+                else if (selectedMetod == 1)
+                {
+                    Singl form = new Singl(density, specificHeat, alpha); // Передача значений в конструктор
+                    form.Show();
+                    this.Hide();
+                }
+                else if (selectedMetod == 2)
+                {
+                    TDimen dimen = new TDimen();
+                    dimen.Show();
+                    this.Hide();
+                }
             }
             else
             {
@@ -110,7 +94,6 @@ namespace Version2
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)

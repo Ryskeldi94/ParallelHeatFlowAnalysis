@@ -58,7 +58,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(816, 707);
+            this.panel1.Size = new System.Drawing.Size(834, 707);
             this.panel1.TabIndex = 3;
             // 
             // textBox5
@@ -158,7 +158,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 707);
+            this.ClientSize = new System.Drawing.Size(834, 707);
             this.Controls.Add(this.panel1);
             this.Name = "TDimen";
             this.Text = "TDimen";

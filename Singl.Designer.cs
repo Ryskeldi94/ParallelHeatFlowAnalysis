@@ -37,12 +37,15 @@
             this.ambientTemperature = new System.Windows.Forms.TextBox();
             this.initialTemperature = new System.Windows.Forms.TextBox();
             this.highTempLocation = new System.Windows.Forms.TextBox();
+            this.dataGridViewResults = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.panel1.Controls.Add(this.dataGridViewResults);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.textBox2);
@@ -59,7 +62,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(274, 542);
+            this.button1.Location = new System.Drawing.Point(491, 540);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(307, 107);
             this.button1.TabIndex = 8;
@@ -114,7 +117,6 @@
             this.ambientTemperature.Name = "ambientTemperature";
             this.ambientTemperature.Size = new System.Drawing.Size(79, 40);
             this.ambientTemperature.TabIndex = 2;
-            this.ambientTemperature.TextChanged += new System.EventHandler(this.ambientTemperature_TextChanged);
             // 
             // initialTemperature
             // 
@@ -133,6 +135,17 @@
             this.highTempLocation.TabIndex = 0;
             this.highTempLocation.Text = "\r\n";
             // 
+            // dataGridViewResults
+            // 
+            this.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewResults.Location = new System.Drawing.Point(71, 497);
+            this.dataGridViewResults.Name = "dataGridViewResults";
+            this.dataGridViewResults.RowHeadersWidth = 62;
+            this.dataGridViewResults.RowTemplate.Height = 28;
+            this.dataGridViewResults.Size = new System.Drawing.Size(339, 150);
+            this.dataGridViewResults.TabIndex = 9;
+            this.dataGridViewResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewResults_CellContentClick);
+            // 
             // Singl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -143,6 +156,7 @@
             this.Text = "Form3";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -158,5 +172,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridViewResults;
     }
 }
