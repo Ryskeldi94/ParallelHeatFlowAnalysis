@@ -26,7 +26,6 @@ namespace Version2
 
         public Singl()
         {
-
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -90,8 +89,37 @@ namespace Version2
             textBox2_KeyPress(sender, e);
         }
 
-        // Метод soket теперь возвращает массив результатов
-        static double[] soket(double density, double specificHeat, double alpha, double highTempLocation, double initialTemperature, double ambientTemperature, int numSteps, int nx)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(highTempLocation.Text) || string.IsNullOrEmpty(ambientTemperature.Text) || string.IsNullOrEmpty(initialTemperature.Text))
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля!");
+            }
+            else
+            {
+                double density = _density;
+                double specificHeat = _specificHeat;
+                double alpha = _thermalConductivity;
+
+                string highTemp = highTempLocation.Text;
+                string ambientTemp = ambientTemperature.Text;
+                string initialTemp = initialTemperature.Text;
+
+                int highTempValue = int.Parse(highTemp);
+                float ambientTempValue = float.Parse(ambientTemp);
+                float initialTempValue = float.Parse(initialTemp);
+
+
+                soket(density, specificHeat, alpha, highTempValue, ambientTempValue, initialTempValue);
+            }
+        }
+
+        private void ambientTemperature_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        static void soket(double density, double specificHeat, double alpha, int highTempLocation, float initialTemperature, float ambientTemperature)
         {
             string server = "127.0.0.1";
             int port = 54000;
@@ -101,7 +129,9 @@ namespace Version2
                 using (TcpClient client = new TcpClient(server, port))
                 {
                     NetworkStream stream = client.GetStream();
-                    
+
+                    int numSteps = 100;
+                    int nx = 10;
 
                     byte[] data = BitConverter.GetBytes(density);
                     stream.Write(data, 0, data.Length);
@@ -127,67 +157,32 @@ namespace Version2
                     data = BitConverter.GetBytes(nx);
                     stream.Write(data, 0, data.Length);
 
-                    byte[] receivedData = new byte[nx * numSteps * sizeof(double)];
-                    stream.Read(receivedData, 0, data.Length);
+                    // Выделение буфера правильного размера для результатов двойной точности
+                    data = new byte[nx * numSteps * sizeof(double)];
+                    stream.Read(data, 0, data.Length);
 
                     double[] result = new double[nx * numSteps];
-                    Buffer.BlockCopy(receivedData, 0, result, 0, data.Length);
+                    Buffer.BlockCopy(data, 0, result, 0, data.Length);
 
-                    // Возвращаем результаты
-                    return result;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Выбрасываем исключение для обработки в вызывающем коде
-                throw ex;
-            }
-        }
+                    // Где-то в вашем коде после получения результатов
 
-        // В методе button1_Click мы теперь получаем результаты от soket и отображаем их в dataGridViewResults
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(highTempLocation.Text) || string.IsNullOrEmpty(ambientTemperature.Text) || string.IsNullOrEmpty(initialTemperature.Text))
-            {
-                MessageBox.Show("Please fill in all fields!");
-            }
-            else
-            {
-                try
-                {
-                    double highTemp = double.Parse(highTempLocation.Text);
-                    double ambientTemp = double.Parse(ambientTemperature.Text);
-                    double initialTemp = double.Parse(initialTemperature.Text);
-
-                    int numSteps = 100;
-                    int nx = 10;
-
-                    // Получаем результаты от soket
-                    double[] results = soket(_density, _specificHeat, _thermalConductivity, highTemp, ambientTemp, initialTemp, numSteps, nx);
-
-                    // Очищаем dataGridViewResults перед добавлением новых результатов
-                    dataGridViewResults.Rows.Clear();
-
-                    // Добавляем результаты в dataGridViewResults
+                    // Формируем текстовое представление результатов
+                    string resultsText = "Результаты:\r\n";
                     for (int i = 0; i < numSteps; ++i)
                     {
-                        dataGridViewResults.Rows.Add(results.Skip(i * nx).Take(nx).ToArray());
+                        for (int j = 0; j < nx; ++j)
+                        {
+                            resultsText += result[i * nx + j] + " ";
+                        }
+                        resultsText += "\r\n";
                     }
                 }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Invalid input format! Please enter numeric values.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Exception: " + ex.Message);
-                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Exception: " + e.Message);
             }
         }
 
-        private void dataGridViewResults_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }
