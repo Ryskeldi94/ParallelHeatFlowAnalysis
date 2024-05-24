@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace Version2
@@ -11,12 +12,12 @@ namespace Version2
         public EnterPro()
         {
             InitializeComponent();
-            highTempLocation.KeyPress += textBox1_KeyPress;
-            ambientTemperature.KeyPress += textBox2_KeyPress;
-            initialTemperature.KeyPress += textBox3_KeyPress;
+            density.KeyPress += density_KeyPress;
+            specificHeat.KeyPress += specificHeat_KeyPress;
+            alpha.KeyPress += alpha_KeyPress;
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void density_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox textBox = sender as TextBox;
 
@@ -63,39 +64,45 @@ namespace Version2
             }
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void specificHeat_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBox1_KeyPress(sender, e); // Логика идентична textBox1_KeyPress
+            density_KeyPress(sender, e); // Логика идентична textBox1_KeyPress
         }
 
-        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        private void alpha_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBox1_KeyPress(sender, e); // Логика идентична textBox1_KeyPress
+            density_KeyPress(sender, e); // Логика идентична textBox1_KeyPress
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(highTempLocation.Text) || string.IsNullOrEmpty(ambientTemperature.Text) || string.IsNullOrEmpty(initialTemperature.Text))
+            if (string.IsNullOrEmpty(density.Text) || string.IsNullOrEmpty(alpha.Text) || string.IsNullOrEmpty(specificHeat.Text))
             {
-                MessageBox.Show("Пожалуйста, заполните все поля!");
+                MessageBox.Show("Please fill in all fields!");
             }
             else if (selectedMetod == 0)
             {
-                MessageBox.Show("Метод не выбран!");
+                MessageBox.Show("Method not selected!");
             }
             else if (selectedMetod == 1)
             {
-                Singl singl = new Singl();
+                double densityValue = double.Parse(density.Text);
+                double specificHeatValue = double.Parse(specificHeat.Text);
+                double alphaValue = double.Parse(alpha.Text);
+
+                selectedMetod = 2;
+                Singl singl = new Singl(densityValue, specificHeatValue, alphaValue, selectedMetod);
                 singl.Show();
                 this.Hide();
             }
             else if (selectedMetod == 2)
             {
-                TDimen dimen = new TDimen();
+                TDimen dimen = new TDimen(selectedMetod);
                 dimen.Show();
                 this.Hide();
             }
         }
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -105,6 +112,14 @@ namespace Version2
         private void button2_Click(object sender, EventArgs e)
         {
             selectedMetod = 2;
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            MainPage mainPage = new MainPage();
+            mainPage.Show();
+
+            this.Close();
         }
     }
 }

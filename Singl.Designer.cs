@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridViewResults = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -37,7 +38,7 @@
             this.ambientTemperature = new System.Windows.Forms.TextBox();
             this.initialTemperature = new System.Windows.Forms.TextBox();
             this.highTempLocation = new System.Windows.Forms.TextBox();
-            this.dataGridViewResults = new System.Windows.Forms.DataGridView();
+            this.back = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
             this.SuspendLayout();
@@ -45,6 +46,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.dataGridViewResults);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox3);
@@ -60,9 +62,19 @@
             this.panel1.Size = new System.Drawing.Size(843, 696);
             this.panel1.TabIndex = 2;
             // 
+            // dataGridViewResults
+            // 
+            this.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewResults.Location = new System.Drawing.Point(47, 471);
+            this.dataGridViewResults.Name = "dataGridViewResults";
+            this.dataGridViewResults.RowHeadersWidth = 62;
+            this.dataGridViewResults.RowTemplate.Height = 28;
+            this.dataGridViewResults.Size = new System.Drawing.Size(339, 150);
+            this.dataGridViewResults.TabIndex = 9;
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(491, 540);
+            this.button1.Location = new System.Drawing.Point(502, 514);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(307, 107);
             this.button1.TabIndex = 8;
@@ -135,16 +147,19 @@
             this.highTempLocation.TabIndex = 0;
             this.highTempLocation.Text = "\r\n";
             // 
-            // dataGridViewResults
+            // back
             // 
-            this.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewResults.Location = new System.Drawing.Point(71, 497);
-            this.dataGridViewResults.Name = "dataGridViewResults";
-            this.dataGridViewResults.RowHeadersWidth = 62;
-            this.dataGridViewResults.RowTemplate.Height = 28;
-            this.dataGridViewResults.Size = new System.Drawing.Size(339, 150);
-            this.dataGridViewResults.TabIndex = 9;
-            
+            this.back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.back.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.back.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.back.Location = new System.Drawing.Point(47, 637);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(160, 47);
+            this.back.TabIndex = 8;
+            this.back.Text = "Назад";
+            this.back.UseVisualStyleBackColor = false;
+            this.back.Click += new System.EventHandler(this.back_Click);
             // 
             // Singl
             // 
@@ -173,5 +188,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridViewResults;
+        private System.Windows.Forms.Button back;
     }
 }

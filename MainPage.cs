@@ -28,8 +28,8 @@ namespace Version2
 
         private void ChoiceIn_Click(object sender, EventArgs e)
         {
-            Singl form3 = new Singl();
-            form3.Show();
+            EnterPro enterPro = new EnterPro();
+            enterPro.Show();
             this.Hide();
         }
     }

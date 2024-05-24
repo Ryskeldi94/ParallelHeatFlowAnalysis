@@ -39,12 +39,14 @@
             this.ambientTemperature = new System.Windows.Forms.TextBox();
             this.initialTemperature = new System.Windows.Forms.TextBox();
             this.highTempLocation = new System.Windows.Forms.TextBox();
+            this.back = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.textBox5);
             this.panel1.Controls.Add(this.textBox4);
             this.panel1.Controls.Add(this.button1);
@@ -154,6 +156,20 @@
             this.highTempLocation.TabIndex = 0;
             this.highTempLocation.Text = "\r\n";
             // 
+            // back
+            // 
+            this.back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.back.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.back.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.back.Location = new System.Drawing.Point(22, 648);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(160, 47);
+            this.back.TabIndex = 8;
+            this.back.Text = "Назад";
+            this.back.UseVisualStyleBackColor = false;
+            this.back.Click += new System.EventHandler(this.back_Click);
+            // 
             // TDimen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -181,5 +197,6 @@
         private System.Windows.Forms.TextBox highTempLocation;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button back;
     }
 }

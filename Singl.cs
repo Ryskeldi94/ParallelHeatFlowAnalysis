@@ -12,7 +12,11 @@ namespace Version2
         private double _thermalConductivity;
 
         // Конструктор с параметрами для передачи свойств металла
-        public Singl(double density, double specificHeat, double thermalConductivity)
+        // Property to store the selected method value
+        public int SelectedMethod { get; set; }
+
+        // Constructor
+        public Singl(double density, double specificHeat, double thermalConductivity, int selectedMethod)
         {
             InitializeComponent();
             highTempLocation.KeyPress += textBox1_KeyPress; // Привязываем событие KeyPress к textBox1
@@ -22,11 +26,13 @@ namespace Version2
             _density = density;
             _specificHeat = specificHeat;
             _thermalConductivity = thermalConductivity;
+            SelectedMethod = selectedMethod; // Store the selected method value
         }
 
         public Singl()
         {
         }
+
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -109,7 +115,6 @@ namespace Version2
                 float ambientTempValue = float.Parse(ambientTemp);
                 float initialTempValue = float.Parse(initialTemp);
 
-
                 soket(density, specificHeat, alpha, highTempValue, ambientTempValue, initialTempValue);
             }
         }
@@ -184,5 +189,20 @@ namespace Version2
             }
         }
 
+        private void back_Click(object sender, EventArgs e)
+        {
+            if (SelectedMethod == 1)
+            {
+                DBMetals dbMetalsForm = new DBMetals();
+                dbMetalsForm.Show();
+                this.Close();
+            }
+            else if (SelectedMethod == 2)
+            {
+                EnterPro enterProForm = new EnterPro();
+                enterProForm.Show();
+                this.Close();
+            }
+        }
     }
 }

@@ -29,22 +29,24 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.ambientTemperature = new System.Windows.Forms.TextBox();
-            this.initialTemperature = new System.Windows.Forms.TextBox();
-            this.highTempLocation = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.alpha = new System.Windows.Forms.TextBox();
+            this.specificHeat = new System.Windows.Forms.TextBox();
+            this.density = new System.Windows.Forms.TextBox();
+            this.back = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button1);
@@ -52,14 +54,40 @@
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.ambientTemperature);
-            this.panel1.Controls.Add(this.initialTemperature);
-            this.panel1.Controls.Add(this.highTempLocation);
+            this.panel1.Controls.Add(this.alpha);
+            this.panel1.Controls.Add(this.specificHeat);
+            this.panel1.Controls.Add(this.density);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(824, 750);
             this.panel1.TabIndex = 3;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.button2.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button2.Location = new System.Drawing.Point(445, 479);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(206, 114);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Решение на двухмерным плоскости\r\n";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.button3.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button3.Location = new System.Drawing.Point(142, 479);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(211, 114);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Решение на одномерным плоскости";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
@@ -111,56 +139,44 @@
             this.label2.Text = "Вводить своиство металла\r\n";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // ambientTemperature
+            // alpha
             // 
-            this.ambientTemperature.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ambientTemperature.Location = new System.Drawing.Point(691, 402);
-            this.ambientTemperature.Name = "ambientTemperature";
-            this.ambientTemperature.Size = new System.Drawing.Size(79, 40);
-            this.ambientTemperature.TabIndex = 2;
+            this.alpha.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alpha.Location = new System.Drawing.Point(691, 402);
+            this.alpha.Name = "alpha";
+            this.alpha.Size = new System.Drawing.Size(79, 40);
+            this.alpha.TabIndex = 2;
             // 
-            // initialTemperature
+            // specificHeat
             // 
-            this.initialTemperature.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.initialTemperature.Location = new System.Drawing.Point(691, 299);
-            this.initialTemperature.Name = "initialTemperature";
-            this.initialTemperature.Size = new System.Drawing.Size(79, 40);
-            this.initialTemperature.TabIndex = 1;
+            this.specificHeat.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.specificHeat.Location = new System.Drawing.Point(691, 299);
+            this.specificHeat.Name = "specificHeat";
+            this.specificHeat.Size = new System.Drawing.Size(79, 40);
+            this.specificHeat.TabIndex = 1;
             // 
-            // highTempLocation
+            // density
             // 
-            this.highTempLocation.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.highTempLocation.Location = new System.Drawing.Point(691, 193);
-            this.highTempLocation.Name = "highTempLocation";
-            this.highTempLocation.Size = new System.Drawing.Size(79, 40);
-            this.highTempLocation.TabIndex = 0;
-            this.highTempLocation.Text = "\r\n";
+            this.density.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.density.Location = new System.Drawing.Point(691, 193);
+            this.density.Name = "density";
+            this.density.Size = new System.Drawing.Size(79, 40);
+            this.density.TabIndex = 0;
+            this.density.Text = "\r\n";
             // 
-            // button2
+            // back
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button2.Location = new System.Drawing.Point(445, 479);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(206, 114);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Решение на двухмерным плоскости\r\n";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.button3.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button3.Location = new System.Drawing.Point(142, 479);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(211, 114);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Решение на одномерным плоскости";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.back.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.back.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.back.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.back.Location = new System.Drawing.Point(12, 691);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(160, 47);
+            this.back.TabIndex = 11;
+            this.back.Text = "Назад";
+            this.back.UseVisualStyleBackColor = false;
+            this.back.Click += new System.EventHandler(this.back_Click);
             // 
             // EnterPro
             // 
@@ -184,10 +200,11 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox ambientTemperature;
-        private System.Windows.Forms.TextBox initialTemperature;
-        private System.Windows.Forms.TextBox highTempLocation;
+        private System.Windows.Forms.TextBox alpha;
+        private System.Windows.Forms.TextBox specificHeat;
+        private System.Windows.Forms.TextBox density;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button back;
     }
 }

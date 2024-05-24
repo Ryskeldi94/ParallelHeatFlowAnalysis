@@ -19,7 +19,7 @@ namespace Version2
             comboBoxMetals.DropDownStyle = ComboBoxStyle.DropDownList;
 
             // Загрузка данных из JSON файла
-            string jsonFilePath = "C:\\Users\\rrysk\\OneDrive\\Рабочий стол\\Диплом\\Диплом граф интерфеис\\Version2\\metals.json";
+            string jsonFilePath = "C:\\Users\\Ryskeldi\\Documents\\ParallelHeatFlowAnalysis\\metals.json";
             if (File.Exists(jsonFilePath))
             {
                 string jsonData = File.ReadAllText(jsonFilePath);
@@ -75,13 +75,14 @@ namespace Version2
                 }
                 else if (selectedMetod == 1)
                 {
-                    Singl form = new Singl(density, specificHeat, alpha); // Передача значений в конструктор
+                    Singl form = new Singl(density, specificHeat, alpha, selectedMetod); // Передача значений в конструктор
                     form.Show();
                     this.Hide();
                 }
                 else if (selectedMetod == 2)
                 {
-                    TDimen dimen = new TDimen();
+                    selectedMetod = 1;
+                    TDimen dimen = new TDimen(selectedMetod);
                     dimen.Show();
                     this.Hide();
                 }
@@ -105,9 +106,17 @@ namespace Version2
         {
             selectedMetod = 2;
         }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            // Create an instance of MainPage and show it
+            MainPage mainPage = new MainPage();
+            mainPage.Show(); // Show the instance
+            this.Close(); // Close the current form
+        }
     }
 
-    // Классы для десериализации JSON
+    // Classes for deserializing JSON
     public class Metal
     {
         public int Номер { get; set; }

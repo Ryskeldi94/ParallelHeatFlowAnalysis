@@ -13,7 +13,7 @@ namespace Version2
     public partial class TDimen : Form
     {
        
-        public TDimen()
+        public TDimen(int selectedMethod)
         {
             InitializeComponent();
             highTempLocation.KeyPress += textBox1_KeyPress; // Привязываем событие KeyPress к textBox1
@@ -21,6 +21,7 @@ namespace Version2
             initialTemperature.KeyPress += textBox3_KeyPress;
             textBox5.KeyPress += textBox5_KeyPress;
 
+            SelectedMethod = selectedMethod; // Store the selected method value
         }
 
 
@@ -74,9 +75,6 @@ namespace Version2
                 }
             }
         }
-
-
-
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -138,7 +136,8 @@ namespace Version2
             }
         }
 
-        
+        public int SelectedMethod { get; set; }
+
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -146,6 +145,22 @@ namespace Version2
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            if (SelectedMethod == 1)
+            {
+                DBMetals dbMetalsForm = new DBMetals();
+                dbMetalsForm.Show();
+                this.Close();
+            }
+            else if (SelectedMethod == 2)
+            {
+                EnterPro enterProForm = new EnterPro();
+                enterProForm.Show();
+                this.Close();
             }
         }
     }
